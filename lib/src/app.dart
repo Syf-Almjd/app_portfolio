@@ -1,11 +1,11 @@
 import 'package:app_portfolio/src/Config/AppAssets.dart';
 import 'package:app_portfolio/src/Config/AppConstants.dart';
+import 'package:app_portfolio/src/presentation/WebView/MyHomePage.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 import 'domain/AppConnectivity.dart';
-import 'presentation/WebView/MyHomePage.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
@@ -93,7 +93,7 @@ class _MyAppState extends State<MyApp> {
             ),
           ),
         ),
-        child: MyHomePage(),
+        child: const MyHomePage(),
       ),
     );
   }

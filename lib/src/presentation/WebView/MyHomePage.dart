@@ -23,16 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return SafeArea(
       child: WillPopScope(
         onWillPop: _goBack,
-        child: Scaffold(
-          body: InAppWebView(
-            initialUrlRequest: URLRequest(url: appUrl),
-            initialOptions:
-                InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions()),
-            onWebViewCreated: (InAppWebViewController controller) {
-              _webViewController = controller;
-            },
-          ),
-        ),
+        child: webView(),
       ),
     );
   }
@@ -43,5 +34,16 @@ class _MyHomePageState extends State<MyHomePage> {
       return false;
     }
     return true;
+  }
+
+  Widget webView() {
+    return InAppWebView(
+      initialUrlRequest: URLRequest(url: appUrl),
+      initialOptions:
+          InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions()),
+      onWebViewCreated: (InAppWebViewController controller) {
+        _webViewController = controller;
+      },
+    );
   }
 }
