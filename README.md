@@ -39,6 +39,7 @@ To run the SaifAlmajd Portfolio App locally, make sure you have Flutter installe
 ## Technologies Used
 
 - Flutter
+- Dart
 
 ## Contributing
 
@@ -47,6 +48,18 @@ If you'd like to contribute to the SaifAlmajd Portfolio App, please follow these
 1. Fork the repository.
 2. Create a new branch for your feature or bug fix.
 3. Make your changes and submit a pull request.
+
+
+### Screenshots
+
+| Screenshot 1                                   | Screenshot 2 | Screenshot 3 |
+|------------------------------------------------|--------------|--------------|
+| ![Screenshot 1](assets/screenshots/image1.jpeg) | ![Screenshot 2](assets/screenshots/image2.jpeg) | ![Screenshot 3](assets/screenshots/image3.jpeg) |
+
+| Screenshot 4 | Screenshot 5 |
+|--------------|--------------|
+| ![Screenshot 4](assets/screenshots/image4.jpeg) | ![Screenshot 5](assets/screenshots/image5.jpeg) |
+
 
 ## Issues and Bugs
 
