@@ -1,99 +1,48 @@
-import 'package:app_portfolio/src/Config/AppAssets.dart';
 import 'package:app_portfolio/src/Config/AppConstants.dart';
+import 'package:app_portfolio/src/presentation/NoInternet/noInternetPage.dart';
 import 'package:app_portfolio/src/presentation/WebView/MyHomePage.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
-import 'domain/AppConnectivity.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  _MyAppState createState() => _MyAppState();
+  MyAppState createState() => MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
-  Map _source = {ConnectivityResult.none: false};
-  final AppConnectivity _connectivity = AppConnectivity.instance;
-
+class MyAppState extends State<MyApp> {
+  bool isConnected = true;
   @override
   void initState() {
     super.initState();
-    _connectivity.initialise();
-    _connectivity.myStream.listen((source) {
-      setState(() => _source = source);
+    checkInternet();
+  }
+
+  checkInternet() async {
+    bool result = await InternetConnection().hasInternetAccess;
+    setState(() {
+      isConnected = result;
     });
   }
 
   @override
   void dispose() {
-    _connectivity.disposeStream();
     super.dispose();
+    checkInternet().dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    bool isConnected = false;
-    switch (_source.keys.toList()[0]) {
-      case ConnectivityResult.mobile:
-        isConnected = true;
-        break;
-      case ConnectivityResult.wifi:
-        isConnected = true;
-        break;
-      case ConnectivityResult.none:
-      default:
-        isConnected = false;
-    }
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: AppConstants.title,
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: Visibility(
-        replacement: Scaffold(
-          body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Image(image: AssetImage(AppAssets.noDataLogo)),
-                const SizedBox(
-                  height: 10,
-                  width: 10,
-                ),
-                Text(
-                  AppConstants.noDataMessage,
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(
-                  height: 50,
-                  width: 50,
-                ),
-                LoadingAnimationWidget.waveDots(
-                    color: isConnected ? Colors.green : Colors.red, size: 50),
-                const SizedBox(
-                  height: 10,
-                  width: 10,
-                ),
-                Text(
-                  isConnected
-                      ? AppConstants.connectedMessage
-                      : AppConstants.disconnectedMessage,
-                  style: TextStyle(
-                      color: isConnected ? Colors.green : Colors.red,
-                      fontSize: 12),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
+      home: Scaffold(
+        body: Visibility(
+          visible: isConnected,
+          replacement: const NoInternetPage(),
+          child: const MyHomePage(),
         ),
-        child: const MyHomePage(),
       ),
     );
   }

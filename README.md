@@ -52,12 +52,12 @@ If you'd like to contribute to the SaifAlmajd Portfolio App, please follow these
 
 ### Screenshots
 
-| Screenshot 1                                   | Screenshot 2 | Screenshot 3 |
-|------------------------------------------------|--------------|--------------|
+| Screenshot 1                                    | Screenshot 2                                    | Screenshot 3                                    |
+|-------------------------------------------------|-------------------------------------------------|-------------------------------------------------|
 | ![Screenshot 1](assets/screenshots/image1.jpeg) | ![Screenshot 2](assets/screenshots/image2.jpeg) | ![Screenshot 3](assets/screenshots/image3.jpeg) |
 
-| Screenshot 4 | Screenshot 5 |
-|--------------|--------------|
+| Screenshot 4                                    | S<br/>creenshot 5                               |
+|-------------------------------------------------|-------------------------------------------------|
 | ![Screenshot 4](assets/screenshots/image4.jpeg) | ![Screenshot 5](assets/screenshots/image5.jpeg) |
 
 
@@ -74,3 +74,6 @@ This project is licensed under the [MIT License](LICENSE.md).
 For any inquiries or collaborations, please contact SaifAlmajd at [syfalmjd11@gmail.com](mailto:syfalmjd11@gmail.com).
 
 Thank you for exploring SaifAlmajd's portfolio! Feel free to reach out for any additional information or feedback.
+
+
+
