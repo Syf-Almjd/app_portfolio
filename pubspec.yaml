@@ -1,7 +1,7 @@
 name: app_portfolio
 description: App Portfolio fo SaifAlmajd
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+5
+version: 1.0.0+6
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
