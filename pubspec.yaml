@@ -12,7 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   url_launcher: ^6.1.12
   internet_connection_checker_plus: ^2.1.0
-  flutter_inappwebview: ^6.1.5
+  webview_flutter: ^4.10.0
 
 
 
