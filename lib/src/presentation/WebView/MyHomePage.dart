@@ -38,9 +38,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget webView() {
     return InAppWebView(
-      initialUrlRequest: URLRequest(url: appUrl),
-      initialOptions:
-          InAppWebViewGroupOptions(crossPlatform: InAppWebViewOptions()),
+      initialUrlRequest:
+          URLRequest(url: appUrl == null ? null : WebUri.uri(appUrl!)),
+      initialSettings: InAppWebViewSettings(),
       onWebViewCreated: (InAppWebViewController controller) {
         _webViewController = controller;
       },
