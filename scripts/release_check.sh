@@ -11,22 +11,12 @@ dump(){ adb shell uiautomator dump /sdcard/u.xml >/dev/null 2>&1; adb shell cat 
 sleep 20; adb exec-out screencap -p > shots/rel_1.png
 echo "REL focus=$(foc) pid=$(adb shell pidof $PKG | tr -d '\r')"
 if [ "$MODE" = back ]; then
-  echo "REL nodes:"; dump 40
-  B=$(adb shell uiautomator dump /sdcard/u.xml >/dev/null 2>&1; adb shell cat /sdcard/u.xml | tr '>' '\n' | grep -i "talk" | grep -o 'bounds="\[[0-9]*,[0-9]*\]\[[0-9]*,[0-9]*\]"' | head -1)
-  echo "REL talk_bounds=$B"
-  if [ -n "$B" ]; then
-    adb shell input swipe 160 450 160 150 300; sleep 2; adb exec-out screencap -p > shots/rel_2.png
-    echo "REL scrolled nodes:"; dump 25
-    B2=$(adb shell uiautomator dump /sdcard/u.xml >/dev/null 2>&1; adb shell cat /sdcard/u.xml | tr '>' '\n' | grep -i "talk" | grep -o 'bounds="\[[0-9]*,[0-9]*\]\[[0-9]*,[0-9]*\]"' | head -1)
-    echo "REL talk_bounds_after_scroll=$B2"
-    python3 - "$B2" > /tmp/xy.txt <<'PY'
-import re,sys
-m=re.findall(r'\d+',sys.argv[1])
-print((int(m[0])+int(m[2]))//2, (int(m[1])+int(m[3]))//2) if len(m)==4 else print("")
-PY
-    XY=$(cat /tmp/xy.txt); echo "REL tap_xy=$XY"
-    if [ -n "$XY" ]; then adb shell input tap $XY; sleep 6; adb exec-out screencap -p > shots/rel_3.png; echo "REL after tap focus=$(foc)"; fi
-  fi
+  # Accessibility nodes are not exposed by the webview, so use keyboard focus: TAB through focusable elements.
+  adb shell input swipe 160 450 160 200 300; sleep 2; adb exec-out screencap -p > shots/rel_2.png
+  echo "REL scrolled once"
+  for i in 1 2 3; do adb shell input keyevent 61; sleep 1; adb exec-out screencap -p > shots/rel_t$i.png; done
+  adb shell input keyevent 66; sleep 6; adb exec-out screencap -p > shots/rel_3.png
+  echo "REL after TAB x3 + ENTER focus=$(foc) pid=$(adb shell pidof $PKG | tr -d '\r')"
   adb shell input keyevent 4; sleep 4; adb exec-out screencap -p > shots/rel_4.png
   echo "REL after back1 focus=$(foc) pid=$(adb shell pidof $PKG | tr -d '\r')"
 fi
